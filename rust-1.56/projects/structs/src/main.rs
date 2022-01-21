@@ -10,6 +10,26 @@ struct Rectangle {
     height: u32,
 }
 
+impl Rectangle {
+    fn area(&self) -> u32 {
+        self.width * self.height
+    }
+
+    fn can_hold(&self, other: &Rectangle) -> bool {
+        self.width > other.width && self.height > other.height
+    }
+
+    fn hello() {
+        println!("{}", "hello, world.");
+    }
+
+    fn square(size: u32) -> Rectangle {
+        Rectangle {
+            width: size,
+            height: size,
+        }
+    }
+}
 fn main() {
     // let mut user1 = User {
     //     email: String::from("fshouhai@gmail.com"),
@@ -41,12 +61,20 @@ fn main() {
         width: 30, height: 50
     };
 
+    let rect3 = Rectangle {
+        width: 15, height: 25
+    };
+
     println!(
         "The area of the rectangle is {} square pixels.",
       
         area(&rect2)
     );
 
+    println!("rect2.area(): {}", rect2.area());
+    println!("can hold: {}", rect2.can_hold(&rect3));
+    println!("hello: {:?}", Rectangle::hello());
+    println!("square: {:?}", Rectangle::square(10));
     println!("{:?}", rect2)
 }
 
