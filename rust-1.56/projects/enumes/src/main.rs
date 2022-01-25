@@ -1,3 +1,5 @@
+use core::num;
+
 // enum IpAddrKind {
 //     V4,
 //     V6,
@@ -120,14 +122,29 @@
 //     println!("{:?}, {:?}", six, none);
 // }
 
+// fn main() {
+//     let dice_roll = 9;
+//     match dice_roll {
+//         3 => add_fancy_hat(),
+//         7 => remove_fancy_hat(),
+//         _ => (), //占位符
+//     }
+// }
+
+// fn add_fancy_hat() {}
+// fn remove_fancy_hat() {}
+
 fn main() {
     let dice_roll = 9;
     match dice_roll {
         3 => add_fancy_hat(),
         7 => remove_fancy_hat(),
-        _ => (), //不做任何处理
+        other => move_player(other), //通配模式
     }
 }
 
 fn add_fancy_hat() {}
 fn remove_fancy_hat() {}
+fn move_player(num_spaces: u8) {
+    println!("{}", num_spaces);
+}
