@@ -141,6 +141,13 @@ fn main() {
         7 => remove_fancy_hat(),
         other => move_player(other), //通配模式
     }
+
+    // if let 语句，可以认为 if let 是 match 的一个语法糖，它当值匹配某一模式时执行代码而忽略所有其他值。
+    if let 3 = dice_roll {
+        println!("AAA");
+    } else {
+        println!("BBB");
+    }
 }
 
 fn add_fancy_hat() {}
