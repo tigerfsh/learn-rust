@@ -9,7 +9,8 @@ fn main() {
     let args: Vec<String> = env::args().collect();
 
     let config = Config::new(&args).unwrap_or_else(|error| {
-        print!("{}\n", error);
+        // 标准库提供了 eprintln! 宏来打印到标准错误流
+        eprintln!("{}\n", error);
         process::exit(1);
     });
 
@@ -20,7 +21,7 @@ fn main() {
     // }
 
     mygrep::run(config).unwrap_or_else(|error| {
-        println!("{}", error);
+        eprintln!("{}", error);
         process::exit(1);
     });
 }
