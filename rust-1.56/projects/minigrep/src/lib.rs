@@ -23,12 +23,14 @@ safe, fast, productive.
 Pick three.
 Trust me.";
 
-        assert_eq!(vec!["Rust:", "Trust me."], search_case_insensitive(query, contents));
+        assert_eq!(
+            vec!["Rust:", "Trust me."],
+            search_case_insensitive(query, contents)
+        );
     }
 }
 use std::error::Error;
 use std::fs;
-
 
 pub struct Config {
     pub query: String,
@@ -47,10 +49,13 @@ impl Config {
 
         let case_sensitive = std::env::var("CASE_SENSITIVE").is_ok();
 
-        Ok(Config { query, filename, case_sensitive})
+        Ok(Config {
+            query,
+            filename,
+            case_sensitive,
+        })
     }
 }
-
 
 pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
     let contents = fs::read_to_string(config.filename)?;
@@ -63,7 +68,6 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
         search_case_insensitive(&config.query, &contents)
     };
 
-
     for matched_line in matched_lines {
         println!("Matched line: {}", matched_line);
     }
@@ -73,26 +77,36 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
 
 // 当从函数返回一个引用，返回值的生命周期参数需要与一个参数的生命周期参数相匹配
 pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
-    let mut result = Vec::new();
-    
-    for line in contents.lines() {
-        if line.contains(query) {
-            result.push(line);
-        }
-    }
+    // let mut result = Vec::new();
 
-    result
+    // for line in contents.lines() {
+    //     if line.contains(query) {
+    //         result.push(line);
+    //     }
+    // }
+
+    // result
+    contents
+        .lines()
+        .filter(|line| line.contains(query))
+        .collect()
 }
 
 pub fn search_case_insensitive<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
-    let mut result = Vec::new();
     let query = query.to_lowercase();
 
-    for line in contents.lines() {
-        if line.to_lowercase().contains(&query) {
-            result.push(line);
-        }
-    }
+    // let mut result = Vec::new();
 
-    result
+    // for line in contents.lines() {
+    //     if line.to_lowercase().contains(&query) {
+    //         result.push(line);
+    //     }
+    // }
+
+    // result
+
+    contents
+        .lines()
+        .filter(|line| line.to_lowercase().contains(&query))
+        .collect()
 }

@@ -3,7 +3,6 @@ use std::process;
 
 use mygrep::Config;
 
-
 fn main() {
     // collect 可以被用来创建很多类型的集合，所以这里显式注明 args 的类型来指定我们需要一个字符串 vector。
     let args: Vec<String> = env::args().collect();
