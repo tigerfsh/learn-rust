@@ -15,7 +15,15 @@ fn main() {
     hello(&name);
     // Rust 可以通过 deref 调用将 &MyBox<String> 变为 &String。 不是很理解具体过程！！！
 
+    let _c = CustomSmartPointer {
+        data: String::from("my stuff"),
+    };
+    let _d = CustomSmartPointer {
+        data: String::from("other stuff"),
+    };
+    drop(_c);
 
+    println!("CustomSmartPointers created.");
 }
 
 struct MyBox<T> (T);
@@ -36,4 +44,14 @@ impl<T> Deref for MyBox<T> {
 
 fn hello(name: &str) {
     println!("Hello, {}!", name);
+}
+
+struct CustomSmartPointer {
+    data: String,
+}
+
+impl Drop for CustomSmartPointer {
+    fn drop(&mut self) {
+        println!("Dropping CustomSmartPointer with data `{}`!", self.data);
+    }
 }
