@@ -1,0 +1,3 @@
+[submodule "rust-1.57/wasm-game-of-life/www"]
+	path = rust-1.57/wasm-game-of-life/www
+	url = https://github.com/rustwasm/create-wasm-app.git
